@@ -1,0 +1,40 @@
+
+form.login div.form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* padding: 5px; */
+}
+form.login div.form  img{
+    width: 100%;
+}
+form.login div.form div.control{
+    background: rgba(0, 0, 0, 0.877);
+    padding: 5px;
+}
+form.login div.form div.control span a{
+    text-decoration: none;
+    font-size: smaller;
+}
+form.login div input{
+    margin-bottom: 5px;
+    /* box-shadow: none; */
+    margin-top: 5px;
+    background-color: rgb(197, 197, 170);
+    border-radius: 0;
+    color: white;
+}
+form.login div input:focus{
+    color: white;
+    box-shadow: none;
+}
+form.login div input::placeholder{
+    color: rgb(190, 190, 190);
+}
+
+form.login div.form div.button{
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+}

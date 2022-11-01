@@ -1,0 +1,31 @@
+div.search-bar{
+    position:relative;
+    /* background-color: rgb(46, 14, 14); */
+}
+div.search-bar i{
+    position:absolute;
+    left:10px;
+    top:8px
+}
+
+div.search-bar input{
+    height: 30px;
+    border-radius: 5px;
+    background-color: rgb(36, 43, 102);
+    border:1.5px solid rgb(92, 92, 92);
+    font-size: 16px;
+    width: 100%;
+    z-index: 5;
+    text-align: right;
+    padding: 5px;
+    color: rgb(235, 235, 235);
+}
+
+div.search-bar input:focus{
+    outline: none;
+    /* background-color: #414141; */
+    text-align: center;
+}
+div.search-bar input::placeholder{
+    color: rgb(161, 161, 161);
+}

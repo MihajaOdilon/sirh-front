@@ -1,0 +1,21 @@
+div.dashboard div.main::-webkit-scrollbar{
+    /* display: none; */
+}
+div.dashboard div.main{
+    overflow-y: auto ;
+}
+div.dashboard aside.bOQEtf{
+    border: none;
+    /* min-width: 300px; */
+    /* width: auto; */
+}
+div.dashboard aside.eyZRyX{
+    border: none;
+}
+div.dashboard button.sidebar-icon{
+    position:fixed;
+    top: 50%;
+    z-index:4;
+    border-radius: 0 10px 10px 0;
+    background-color: rgb(29, 57, 99);
+}

@@ -1,0 +1,50 @@
+.sidebar a{
+    white-space: nowrap;
+}
+.sidebar-inner::-webkit-scrollbar{
+    display: none;
+}
+div.sidebar-inner{
+    background-color: rgb(38, 48, 48);
+}
+div.Collapsible span.Collapsible__trigger{
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: rgb(196, 196, 196);
+}
+div.Collapsible span.Collapsible__trigger.is-open i.fa-caret-down{
+    transform: rotate(180deg);
+}
+div.Collapsible div.Collapsible__contentInner a{
+    color: rgb(196, 196, 196);
+    font-size: 14px;
+    padding:5px 5px 5px 3rem;
+}
+div.Collapsible div.Collapsible__contentInner a:hover{
+    color: rgb(255, 255, 255);
+}
+div.Collapsible div.Collapsible__contentInner a.active{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+}
+div.Collapsible div.Collapsible__contentInner{
+    /* background-color: #1e1f2063;  */
+}
+span.trigger a.active{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+span.trigger a{
+    padding: 5px;
+    font-size: 16px;
+    color: rgb(196, 196, 196);
+}
+span.trigger a:hover{
+    color: white;
+    /* background: #000; */
+}
+
+

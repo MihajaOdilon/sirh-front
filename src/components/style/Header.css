@@ -1,0 +1,61 @@
+nav.navbar{
+  padding: 0;
+  margin: 0;
+}
+header.header{
+    background-color: rgb(29, 57, 99);
+    /* position: sticky; */
+    z-index: 5;
+    top: 0;
+  }
+header nav.navbar button.navbar-toggler:focus{
+    box-shadow: none;
+  }
+  
+header nav.navbar div.dropdown button{
+  border: none;
+  border-radius: 0;
+  color: white;
+  padding: 5px;
+}
+header nav.navbar ul li a{
+  font-size: 16px;
+  color: rgb(196, 196, 196);
+}
+header nav.navbar ul li a:hover{
+  color: white;
+}
+header nav.navbar ul li a.active{
+  color: white;
+}
+header nav.navbar ul.home li a i{
+  color: rgb(160, 160, 160)
+}
+header nav.navbar ul.home li a i:hover{
+  color: white
+}
+header nav.navbar ul.home li a.active i{
+  color: white;
+}
+
+header nav.navbar ul.dropdown-menu{
+  background-color: rgba(32, 32, 32, 0.822);
+  z-index: 1000;
+}
+header nav.navbar ul.dropdown-menu li a{
+  color: rgb(160, 160, 160);
+  font-size: smaller;
+  font-weight: 500;
+}
+header nav.navbar ul.dropdown-menu li a:hover{
+  color: white;
+}
+header nav.navbar div.dropdown ul li a:hover{
+  background-color: transparent !important;
+}
+header nav.navbar div.dropdown button span{
+  font-size: small;
+  font-weight: 500;
+  color: rgb(200, 200, 200);
+  
+}
