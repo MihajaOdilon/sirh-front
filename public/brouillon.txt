@@ -1,0 +1,303 @@
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.1.0",
+    "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.6.1",
+    "popper.js": "^1.16.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+
+  import React from "react";
+import {
+  Route,
+  Link,
+  Routes
+} from "react-router-dom";
+
+// Each logical "route" has two components, one for
+// the sidebar and one for the main area. We want to
+// render both of them in different places when the
+// path matches the current URL.
+
+// We are going to use this route config in 2
+// spots: once for the sidebar and once in the main
+// content section. All routes are in the same
+// order they would appear in a <Switch>.
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    sidebar: () => <div>home!</div>,
+    main: () => <h2>Home</h2>
+  },
+  {
+    path: "/bubblegum",
+    sidebar: () => <div>bubblegum!</div>,
+    main: () => <h2>Bubblegum</h2>
+  },
+  {
+    path: "/shoelaces",
+    sidebar: () => <div>shoelaces!</div>,
+    main: () => <h2>Shoelaces</h2>
+  }
+];
+
+export default function SidebarExample() {
+  return (
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            padding: "10px",
+            width: "40%",
+            background: "#f0f0f0"
+          }}
+        >
+          <ul style={{ listStyleType: "none", padding: 0 }}>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/bubblegum">Bubblegum</Link>
+            </li>
+            <li>
+              <Link to="/shoelaces">Shoelaces</Link>
+            </li>
+          </ul>
+
+          <Routes>
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                children={<route.sidebar />}
+              />
+            ))}
+          </Routes>
+        </div>
+
+        <div style={{ flex: 1, padding: "10px" }}>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                children={<route.main />}
+              />
+            ))}
+          </Routes>
+        </div>
+      </div>
+  );
+}
+{this.state.showForm ? <li onClick={this.setShowForm}><NavLink to="add_entity1"> Add</NavLink></li>: <Outlet/>}
+<div id="sidebar" class="collapse collapse-horizontal show border-end">
+            <nav className="sidebar">
+                <ul className="navbar-nav overflow-hidden">
+                    <li className="nav-item"><NavLink end className="nav-link" to={"entity1"}>Item1000000000000000</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity2"}>Item2</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity3"}>Item3</NavLink></li>
+                </ul>
+            </nav>
+        </div>
+                    <li className="nav-item"><NavLink end className="nav-link" to={"entity1"}>Item1</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity2"}>Item2</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity3"}>Item3</NavLink></li>
+
+                    <div class="col bg-secondary">
+                      <div className='row'>
+                          <div className='col-1'>
+                              <i className="bi bi-layout-text-sidebar fs-4" data-bs-target="#sidebar" data-bs-toggle="collapse"></i>
+                          </div>
+                          <div className='col-11 p-0 text-end'>
+                              <input type={"text"}></input>
+                          </div>
+                      </div>
+                      <div className='container-fluid p-0'><Outlet/></div>
+                </div>
+
+                                <main class="col p-0 bg-secondary">
+                    <span>
+                        <i class="bi bi-layout-text-sidebar fs-4 p-1" data-bs-target="#sidebar" data-bs-toggle="collapse">hello</i>
+                        <input type={"text"}></input>
+                    </span>
+                    <div className="mt-5"><Outlet/></div>
+                </main>
+
+                bi bi-layout-text-sidebar
+
+
+                    <div className={classname}>
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                            <span><img src='pu.png' alt='pu' width={"30px"} height={"30px"} className='rounded-circle'/></span>
+                            <span> UserName</span>
+                        </button>
+                        <ul className="dropdown-menu">
+                            <li><NavLink to={"/profil"} className="dropdown-item">Mon profil</NavLink></li>
+                            <li><NavLink to={"/setting"} className="dropdown-item">Paramètres</NavLink></li>
+                            <li><NavLink to={"/deconnection"} className="dropdown-item">Deconnexion</NavLink></li>
+                        </ul>
+                    </div>
+
+
+
+                    div#sidebar{
+    transition-timing-function:cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    /* position: fixed; */
+    padding: 0;
+}
+div#sidebar input{
+    height: 25px;
+    background-color: transparent;
+    border:2px solid rgb(73, 73, 73);
+    font-size: 14px;
+    width: 100%;
+}
+div#sidebar input:focus{
+    outline: none;
+    background-color: rgb(182, 182, 182);
+}
+
+span.trigger a.active{
+    color: white;
+    background-color: rgb(1, 15, 22);
+}
+span.trigger a{
+    padding: 5px;
+    font-size: 16px;
+    color: rgb(187, 187, 187);
+}
+span.trigger{
+    white-space: nowrap;
+}
+span.trigger a:hover{
+    color: white;
+}
+div.Collapsible span.Collapsible__trigger{
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    white-space: nowrap;
+    color: rgb(187, 187, 187);
+
+}
+div#sidebar div.Collapsible ul.navbar-nav{
+    white-space: nowrap;
+}
+div#sidebar div.Collapsible ul.navbar-nav li a{
+    color: rgb(187, 187, 187);
+    font-size: 14px;
+    padding:5px 1rem;
+    white-space: nowrap;
+}
+div#sidebar div.Collapsible ul.navbar-nav li a.active{
+    color: white;
+    background: rgb(1, 15, 22);
+}
+div#sidebar div.Collapsible ul.navbar-nav li a:hover{
+    color: white;
+}
+
+<div id="sidebar" className="collapse collapse-horizontal show">
+            <div className='container-fluid p-0'>
+                <input type={"text"} placeholder='Rechercher'></input>
+            </div>
+            <Collapsible trigger={["Itemmmmmmmm",<i className={'fa fa-chevron-down'}></i>]}>
+                <ul className='navbar-nav'>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity1"}>Element in item 1</NavLink></li>
+                </ul>
+            </Collapsible>
+            <span className='trigger'><NavLink className="nav-link" to={"entity2"}>Item 2</NavLink></span>
+            <Collapsible trigger={["Item3",<i className={"fa fa-chevron-down"}></i>]}>
+                <ul className='navbar-nav'>
+                    <li className="nav-item"><NavLink className="nav-link" to={"entity3"}>Element in item 3 </NavLink></li>
+                </ul>
+            </Collapsible>
+        </div>
+
+        <div className='dashboard h-100'>
+              <span className='sidebar-icon'><i class="bi bi-layout-text-sidebar text-white fs-4" data-bs-target="#sidebar" data-bs-toggle="collapse"></i></span>
+                <div class="container-fluid h-100'">
+                    <div class="row h-100'">
+                        <div class="col-sm-auto p-0 h-100'">
+                          <SideBar/>
+                        </div>
+                        <div class="col p-0">
+                            <Outlet/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="sidebar" className="collapse collapse-horizontal show">
+          <div className='container-fluid p-0'>
+
+
+            <div className=''>
+                <Collapsible trigger={["Itemmmmmmmm",<i className={'fa fa-chevron-down'}></i>]}>
+                    <ul className='navbar-nav'>
+                        <li className="nav-item"><NavLink className="nav-link" to={"entity1"}>Element in item 1</NavLink></li>
+                    </ul>
+                </Collapsible>
+                <span className='trigger'><NavLink className="nav-link" to={"entity2"}>Itemmmmmmmmm 2</NavLink></span>
+                <span className='trigger'><NavLink className="nav-link" to={"entity2"}>Itemmmmmmmmm 2</NavLink></span>
+                <Collapsible trigger={["Item3",<i className={"fa fa-chevron-down"}></i>]}>
+                    <ul className='navbar-nav'>
+                        <li className="nav-item"><NavLink className="nav-link" to={"entity3"}>Element in item 3 </NavLink></li>
+                    </ul>
+                </Collapsible>
+            </div>
+          </div>
+        </div>
+
+                <Route path="entity1" element = { <Entity1/> }>
+          <Route path = "add_entity1" element = { <Add/> }></Route>
+        </Route>
+        <Route path="entity2" element = { <Entity2/> }></Route>
+        <Route path="entity3" element = { <Entity3/> }></Route>
+
+        export default class LoginPage extends Component {
+  render() {
+    return (
+        <form className='login'>
+            <div className='form w-25'>
+                <div className='container-fluid p-0'><img src='login1.jpg' alt=''/></div>
+                <div className='container-fluid control'>
+                    <input type={"email"} required className='form-control bg-dark' placeholder="Entrer l'adresse e-mail"></input>
+                    <input type={"password"} required className='form-control bg-dark' placeholder="Entrer le mot de passe"></input>
+                    <span className='text-white'><input type={"checkbox"} required className='form-check-input'/><NavLink to={""}> J'ai lu et j'accepte les termes et conditions et la politique de confidentialité.</NavLink></span>
+                    <div className='button'>
+                        <span className='pt-1'><NavLink to={""}>Mot de passe oublié?</NavLink></span>
+                        <button type='submit' className='btn btn-primary '>S'identifier</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    )
+  }
+}
+import axios from "axios";
+import { useEffect, useState } from "react"
+import $ from 'jquery'
+const Search = (url,param,elem)=>{
+    const [data,setData] = useState([]);
+    useEffect(()=>{
+        $("#search").on('change',console.log("rt"));
+        if(elem!=='')
+            axios.get(url,param).then(({data})=>setData(data)).catch((e)=>console.log(e));
+        },[elem]);
+    return [data];
+}
+export default Search;

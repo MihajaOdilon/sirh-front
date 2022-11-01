@@ -3,11 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@userfront/react": "^0.3.1",
+    "axios": "^1.1.0",
+    "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
+    "datatable": "^2.0.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.6.1",
+    "popper.js": "^1.16.1",
+    "primereact": "^8.7.0",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-axios": "^2.0.6",
+    "react-collapsible": "^2.10.0",
+    "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
+    "react-pro-sidebar": "^1.0.0-alpha.7",
+    "react-responsive": "^9.0.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -34,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
   }
 }
