@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 
-export default class Job extends Component {
-  render() {
-    return (
-      <div className=''>Job</div>
-    )
-  }
+export default function Job() {
+  return (
+    <Outlet/>
+  )
 }
-

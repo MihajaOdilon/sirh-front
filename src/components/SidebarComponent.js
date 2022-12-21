@@ -1,32 +1,35 @@
-import React, { memo } from 'react'
+import React, { useState } from 'react'
 import Collapsible from 'react-collapsible'
-import { Sidebar, Menu } from 'react-pro-sidebar'
+import { Sidebar, Menu, useProSidebar } from 'react-pro-sidebar'
 import { NavLink } from 'react-router-dom'
+import SearchBar from './SearchBar'
 import "./style/Sidebar.css"
 
-export default memo(function SidebarComponent() {
-
-    return (
+export default function SidebarComponent() {
+return (
         <Sidebar className='sidebar' collapsedWidth="0">
-
-            <Menu className=''>
-                <Collapsible trigger={[<span className='text-nowrap'><i className={'fa fa-home text-primary fs-3 sidebar-icon'}/>Gestionnaire</span>,<i className={'fa fa-caret-down'}/>]}>
+            <div className='container-fluid p-0'>
+                {/* <img src='../sirh.png' alt='' width={"100%"} height={"38px"}></img> */}
+            </div>
+            <SearchBar/>
+            <div className='container-fluid menu'>
+                <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#manager" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className={"text-nowrap"}>Gestionnaire<i className="fa fa-angle-down" aria-hidden="true"/></span>
+                </button>
+                <div className="collapse navbar-collapse" id="manager">
                     <ul className='navbar-nav'>
-                        <li className="nav-item"><NavLink className="nav-link" end to={"department"}>Département</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to={"job_category"}>Catégorie professionnelle</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to={"job"}>Emploi</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to={"departments"}><i className=""></i>Département </NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to={"jobcategories"}><i className=""/>Catégorie professionnelle</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to={"jobs"}><i className=""/>Emploie</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to={"holidays"}><i className=""/>Jour ferié</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to={"users"}><i className=""/>Utilisateur</NavLink></li>
                     </ul>
-                </Collapsible>
-                {/* <Collapsible trigger={[<span className='text-nowrap'><i className={'fa fa-home text-primary fs-3 sidebar-icon'}/>Employe</span>,<i className={'fa fa-caret-down'}/>]}>
-                    <ul className='navbar-nav'>
-                        <li className="nav-item"><NavLink className="nav-link" to={"job"} id='employe'>Employe</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to={"job_category"}>Catégorie d'emploie</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to={"job_offer"}>Offre d'emploie</NavLink></li>
-                    </ul>
-                </Collapsible> */}
-                {/* <span className='trigger'><NavLink className="nav-link" to={"department"}><span className='text-nowrap'><i className={'fa fa-home text-primary fs-3 sidebar-icon'}/>Departement</span></NavLink></span> */}
-                {/* <span className='trigger'><NavLink className="nav-link" to={"entity2"}>Itemmmmmmmmm 2</NavLink></span> */}
-            </Menu>
+                </div>
+                <ul className='navbar-nav test'>
+                    <li className="nav-item"><NavLink className="nav-link" to={"joboffers"}><i className=""></i>Offre d'emploi</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to={"employees"}><i className=""/>Employés</NavLink></li>
+                </ul>
+            </div>
         </Sidebar>
     )
-})
+}

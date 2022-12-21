@@ -1,0 +1,12 @@
+div.menubar::-webkit-scrollbar{
+    display: none;
+}
+div.menubar{  
+    position: sticky;
+    bottom: 0px;
+    overflow: hidden;
+    padding: .5rem 1rem; 
+    text-align: end;
+    white-space: nowrap;
+    overflow: auto;
+}

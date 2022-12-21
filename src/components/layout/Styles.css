@@ -1,17 +1,1 @@
-span.sidebar-icon{
-    background-color: rgba(29, 57, 99, 0.829);
-    border-top-right-radius: .7rem;
-    border-bottom-right-radius: .7rem;
-    position: fixed;
-    padding-right: 5px;
-    z-index: 2;
-    top: 50%;
-}
-div.dashboard div.row div.col-sm-auto{
-}
-div.dashboard div.row div.col div.out{
-    /* margin-top: 33px; */
-}
-div{
-    height: 100;
-}
+

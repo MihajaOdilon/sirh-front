@@ -1,0 +1,17 @@
+div.react-datepicker div.react-datepicker__triangle::before,div.react-datepicker div.react-datepicker__triangle::after{
+    margin-left: -150px;
+}
+form.form div.datetime__picker{
+    height: 40px;
+    width: 100% !important;
+}
+form.form div.datetime__picker input{
+    height: 30px !important;
+    outline: none #ced4da !important;
+}
+form.form div.datetime__picker input:focus{
+    outline: auto #ced4da !important;
+}
+form.form div.react-datetime-picker__wrapper{
+    outline: auto #ced4da !important;
+}

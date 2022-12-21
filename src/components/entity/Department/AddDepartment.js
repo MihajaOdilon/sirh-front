@@ -2,24 +2,48 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ContextUrl from '../../../API/Context';
-
+import { INVALID_INPUT } from '../../../redux/constants/alertConstants';
+import { MenuBarConfirm } from '../../MenuBar';
 export default function AddDepartment(){
-  const navigate = useNavigate();
   const [name , setName] = useState("");
+  const [loading,setLoading] = useState(null);
   const context = useContext(ContextUrl);
-  const handleSubmit = async (e) => {
+  const [msg,setMsg] = useState("")
+  const navigate = useNavigate()
+  const handleSubmitAdd = async (e) => {
     e.preventDefault();
-    await axios.post(context.url + 'departments' , {"name":name}).then(({data})=>console.log(data));
-    navigate('..');
+    if(name){
+        await axios.post(context.url + 'departments' , {
+            "name":name
+        })
+        .then(({data})=>{
+            setMsg(data);
+            // setName("");
+            navigate("..")
+            setTimeout(() => {
+                setMsg("");
+            }, 1500);
+        });
+    }
+    else{
+        setLoading(true);
+        setTimeout(()=>{
+          setLoading(false)
+        },1000)
+    }
+    
   }
+
     return (
       <>
-          <form onSubmit={handleSubmit} className='department'>
-              <input className='input-control w-100' required placeholder='Nom de département' onChange={(e)=>setName(e.target.value)} type={"text"}/>
-              <div className='container-fluid text-end p-1'>
-                  <button className="btn btn-danger" type='submit' name='add' id='add_update' onClick={()=>navigate("..")}>Annuler</button>
-                  <button className="btn btn-primary" type='submit' name='add' id='cancel'>Confirmer</button>
+          {msg && <div className='alert bg-success'>{msg}</div>}
+          <form onSubmit={handleSubmitAdd} className='form'>
+              <div className="form-group">
+                <label>Nom</label>
+                <input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)}/>
               </div>
+              {loading && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+              <MenuBarConfirm/>
           </form>
       </>
     )

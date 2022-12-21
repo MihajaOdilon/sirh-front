@@ -1,0 +1,45 @@
+div#deleteModal div.modal-content{
+    /* background: rgb(19, 18, 18); */
+}
+div.modal-header,div.modal-body{
+    color: rgb(117, 117, 117);
+    border-color: rgb(117, 117, 117);
+}
+div.modal-footer{
+    border-color: rgb(117, 117, 117);
+}
+button.btn-close{
+    background: transparent;
+}
+div form.form div.dropdown{
+    margin-bottom: 10px;
+}
+div form.form div.dropdown button.select{
+    text-align: left;
+    height: 40px;
+    margin: 5px 0;
+    outline: auto #ced4da;
+    border-radius: 0;
+    width: 100%;
+    padding: 0 2px;
+}
+div form.form div.dropdown div.dropdown-menu{
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(107, 107, 107);
+}
+div form.form div.dropdown div.dropdown-menu div.item{
+    max-height: 100px;
+    overflow: auto;
+    padding: 0;
+    margin: 0;
+}
+div form.form div.dropdown div.dropdown-menu div.item::-webkit-scrollbar{
+    display: none;
+}
+div form.form div.dropdown div.dropdown-menu button{
+    color: rgb(99, 99, 99);
+}
+div form.form div.dropdown span{
+    color: rgb(102, 102, 102);
+}

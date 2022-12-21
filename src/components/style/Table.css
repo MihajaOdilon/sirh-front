@@ -1,0 +1,51 @@
+*,div{
+    box-sizing: border-box;
+}
+div.list{
+    overflow: auto;
+    overflow-wrap: break-word;
+    padding:1rem;
+    padding-bottom: 0;
+}
+div.card-heading::-webkit-scrollbar,div.list::-webkit-scrollbar{
+    display: none;
+}
+table.table {
+    border: 1px solid beige;
+    box-shadow: 0 8px 5px -6px rgb(102, 102, 102);
+    border-collapse: separate;
+    border-radius: .3em;
+}
+table.table a{
+    color: rgb(6, 73, 117);
+    font-weight: 500;
+
+}
+table.table thead tr{
+    color: rgb(128, 128, 128);
+    font-size: 15px;
+    font-weight: 500;
+}
+table.table tbody tr{
+    color: rgb(136, 136, 136);
+    font-size: 15px;
+
+}
+table.table tbody tr td button{
+    padding: 0 5px;
+    border-radius: 0;
+}
+table.table tbody tr td button.btn:disabled{
+    border: none;
+}
+input[type=checkbox]{
+    background: rgb(0, 0, 0);
+    border: 1px solid rgb(75, 75, 75);
+}
+table.table tbody tr span.percent{
+    padding: 0 3px;
+    margin: 5px;
+    font-size: small;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+}

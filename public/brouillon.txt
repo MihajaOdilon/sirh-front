@@ -100,7 +100,7 @@ export default function SidebarExample() {
   );
 }
 {this.state.showForm ? <li onClick={this.setShowForm}><NavLink to="add_entity1"> Add</NavLink></li>: <Outlet/>}
-<div id="sidebar" class="collapse collapse-horizontal show border-end">
+<div id="sidebar" className="collapse collapse-horizontal show border-end">
             <nav className="sidebar">
                 <ul className="navbar-nav overflow-hidden">
                     <li className="nav-item"><NavLink end className="nav-link" to={"entity1"}>Item1000000000000000</NavLink></li>
@@ -113,7 +113,7 @@ export default function SidebarExample() {
                     <li className="nav-item"><NavLink className="nav-link" to={"entity2"}>Item2</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" to={"entity3"}>Item3</NavLink></li>
 
-                    <div class="col bg-secondary">
+                    <div className="col bg-secondary">
                       <div className='row'>
                           <div className='col-1'>
                               <i className="bi bi-layout-text-sidebar fs-4" data-bs-target="#sidebar" data-bs-toggle="collapse"></i>
@@ -125,9 +125,9 @@ export default function SidebarExample() {
                       <div className='container-fluid p-0'><Outlet/></div>
                 </div>
 
-                                <main class="col p-0 bg-secondary">
+                                <main className="col p-0 bg-secondary">
                     <span>
-                        <i class="bi bi-layout-text-sidebar fs-4 p-1" data-bs-target="#sidebar" data-bs-toggle="collapse">hello</i>
+                        <i className="bi bi-layout-text-sidebar fs-4 p-1" data-bs-target="#sidebar" data-bs-toggle="collapse">hello</i>
                         <input type={"text"}></input>
                     </span>
                     <div className="mt-5"><Outlet/></div>
@@ -137,7 +137,7 @@ export default function SidebarExample() {
 
 
                     <div className={classname}>
-                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown">
                             <span><img src='pu.png' alt='pu' width={"30px"} height={"30px"} className='rounded-circle'/></span>
                             <span> UserName</span>
                         </button>
@@ -227,13 +227,13 @@ div#sidebar div.Collapsible ul.navbar-nav li a:hover{
         </div>
 
         <div className='dashboard h-100'>
-              <span className='sidebar-icon'><i class="bi bi-layout-text-sidebar text-white fs-4" data-bs-target="#sidebar" data-bs-toggle="collapse"></i></span>
-                <div class="container-fluid h-100'">
-                    <div class="row h-100'">
-                        <div class="col-sm-auto p-0 h-100'">
+              <span className='sidebar-icon'><i className="bi bi-layout-text-sidebar text-white fs-4" data-bs-target="#sidebar" data-bs-toggle="collapse"></i></span>
+                <div className="container-fluid h-100'">
+                    <div className="row h-100'">
+                        <div className="col-sm-auto p-0 h-100'">
                           <SideBar/>
                         </div>
-                        <div class="col p-0">
+                        <div className="col p-0">
                             <Outlet/>
                         </div>
                     </div>
@@ -301,3 +301,59 @@ const Search = (url,param,elem)=>{
     return [data];
 }
 export default Search;
+
+                                <div className='progress'>
+                                    <div className='progress-bar bg-primary'
+                                        role={"progressbar"}
+                                        style={{width: percent+ "%"}}
+                                        aria-valuenow={percent}
+                                        aria-valuemin={0}
+                                        aria-valuemax={"100"}>
+                                        {percent + "%"}
+                                    </div>
+                                </div>  
+                              /* div.Collapsible span.Collapsible__trigger{
+    display: flex;
+    padding: 5px 0;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(196, 196, 196);
+}
+div.Collapsible span.Collapsible__trigger.is-open i.fa-caret-right{
+    padding: 5px;
+    transform: rotate(90deg);
+}
+div.Collapsible span.Collapsible__trigger i.fa-caret-right{
+    padding: 5px;
+}
+div.Collapsible div.Collapsible__contentInner a{
+    color: rgb(160, 160, 160);
+    font-size: 14px;
+    padding:8px 20px;
+    font-weight: 500;
+}
+div.Collapsible div.Collapsible__contentInner a:hover{
+    color: rgb(230, 230, 230);
+}
+div.Collapsible div.Collapsible__contentInner a.active{
+    background-color: rgb(26, 26, 26);
+    color: rgb(230, 230, 230);
+}
+div.Collapsible div.Collapsible__contentInner li{
+margin: 2px 0px;
+}
+span.trigger a.active{
+    color: white;
+    background-color: rgb(26, 26, 26);
+}
+span.trigger a{
+    padding: 8px 16px;
+    font-size: 16px;
+    color: rgb(196, 196, 196);
+    font-weight: 500;
+}
+span.trigger a:hover{
+    color: white;
+} */

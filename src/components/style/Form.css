@@ -1,0 +1,66 @@
+div form.form{
+    padding: 1rem;
+    border: 1px solid rgb(165, 165, 165);
+    box-shadow: 0 8px 5px -6px rgb(102, 102, 102);
+    margin: 1rem;
+    /* background-color: rgb(238, 238, 238); */
+}
+div form.form div.form-group{
+    margin-bottom: 10px;
+}
+/* div form.form div.contract__category{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.562);
+    
+    font-size: 1rem;
+    width: 100%;
+    padding: 0 .5rem;
+} */
+div form.form div.contract__category{
+    display: flex;
+    padding:0;
+    padding-bottom: 1rem;
+    justify-content: space-between;
+}
+div.container__contract__category{
+    outline: auto #ced4da;
+    padding: 1rem;
+}
+
+div form.form input:not([type=radio]):not([type=checkbox]):not([type=button]):not([type=submit]),div form.form select, div form.form textarea{
+    height: 40px;
+    margin: 5px 0;
+    background: transparent;
+    border-radius: 0;
+    width: 100%;
+    padding: 0 2px;
+    color: rgb(117, 117, 117);
+    font-size: 1rem;
+    outline: auto #ced4da;
+}
+
+div form.form input::placeholder, div form.form textarea::placeholder{
+    color: rgb(146, 146, 146);
+}
+div form.form label{
+    color:rgb(95, 95, 95);
+    font-size: .9rem;
+    font-weight: 500;
+    
+}
+div form.form textarea{
+    height: 80px;
+}
+div form.form input:focus, div form.form textarea:focus{
+    outline: auto #ced4da;
+    box-shadow: none;
+}
+div.alert{
+    padding: 0 5px;
+    border-radius: 0;
+    margin: 0;
+    margin-bottom: 5px;
+    color: rgb(255, 255, 255);
+    border: 0;
+    font-size: .9rem;
+}
+

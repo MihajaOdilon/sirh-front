@@ -1,0 +1,1 @@
+export const INVALID_INPUT = "Veuiller renseigner touts les champs"
