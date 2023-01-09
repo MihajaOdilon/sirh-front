@@ -20,21 +20,21 @@ export default function AddUser(){
             navigate("..")
           setTimeout(() => {
               setSuccessMsg([])
-          }, 1500)
+          }, 3000)
       }).catch((err)=>{
           setErrMsg(err.response.data);
           setTimeout(() => {
               setErrMsg([]);
-          }, 1500);
+          }, 3000);
       })
   }
     return (
       <>
-          {successMsg && <div className='alert bg-success'>{successMsg}</div>}
+          {successMsg && <div className='alert alert-success'>{successMsg}</div>}
           <form onSubmit={handleSubmitAdd} className='form'>
               <input className='input-control' required placeholder="Nom d' utilisateur" value={null} onChange={(e)=>setUserName(e.target.value)} type={"text"}/>
               <input className='input-control' required placeholder='Mot de passe' onChange={(e)=>setPassword(e.target.value)} type={"password"}/>
-              {errMsg && <div className='alert bg-warning'>{errMsg}</div>}
+              {errMsg && <div className='alert alert-warning'>{errMsg}</div>}
               <MenuBarConfirm/>
           </form>
       </>

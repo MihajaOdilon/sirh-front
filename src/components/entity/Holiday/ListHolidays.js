@@ -12,7 +12,7 @@ export default function ListHolidays() {
     const [editDisabled, setEditDisabled] = useState(true);
     const [holidays,setholidays] = useState([]);
     const [holidayId,setHolidayId] = useState([]);
-    const [msg,setMsg] = useState([]);
+    const [msg,setMsg] = useState();
     
     useEffect(()=>{
       async function fetchData(){
@@ -25,8 +25,8 @@ export default function ListHolidays() {
       .then(({data})=>{
           setMsg(data);
           setTimeout(() => {
-              setMsg([]);
-          }, 1500);
+              setMsg();
+          }, 3000);
       })
       setIds([])
       setDeleteDisabled(true);
@@ -74,26 +74,33 @@ export default function ListHolidays() {
     // },[editDisabled,ids,navigate])
 
     return (
-        <>
+      <>
         <div className="modal fade" id='deleteModal' tabIndex="-1">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Suppression</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 className="modal-title text-danger">Suppression!</h5>
               </div>
               <div className="modal-body">
-                <p>Voulez-vous supprimer vraiment la sélection ?</p>
+                <p>Voulez-vous supprimer cet jour ferié?</p>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" className="btn btn-primary" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
+                <button type="button" className="btn btn-danger" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
               </div>
             </div>
           </div>
         </div>
         <div className='container-fluid list'>
-            {msg && <div className='alert bg-danger'>{msg}</div>}
+            {
+                msg &&
+                <div className="toast show">
+                    <div class="toast-header alert-danger">
+                        {msg}
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            }
             <table className='table'>
                 <thead>
                 <tr className=''>
@@ -104,22 +111,33 @@ export default function ListHolidays() {
                 </tr>
                 </thead>
                 <tbody>
-                {holidays.length===0? <tr><td colSpan={3}>Aucun élément</td></tr> :
+                {holidays.length===0? <tr><td colSpan={5}>Aucun élément</td></tr> :
                     holidays.map((holiday,index)=>{
                         return(
                         <tr key={holiday.id}>
                             <th scope='row'><input type={"checkbox"} value={holiday.id} onChange={updateIds} className='form-check-input'></input></th>
-                            <td><NavLink to={""} className={"text-decoration-none"}>{holiday.name}</NavLink></td>
+                            <td>{holiday.name}</td>
                             <td>{holiday.date}</td>
-                            <td><i className="fa fa-edit text-primary" onClick={()=>navigate(holiday.id+"/edit")}></i></td>
-                            <td><i className="fa fa-trash text-danger" onClick={()=>setHolidayId(holiday.id)} data-bs-toggle="modal" data-bs-target="#deleteModal"></i></td>
+                            <td><button type='button' className='btn' onClick={()=>navigate(holiday.id+"/edit")}><i className="fa fa-edit text-primary"/></button></td>
+                            <td><button type='button' className='btn'  onClick={()=>setHolidayId(holiday.id)} data-bs-toggle="modal" data-bs-target="#deleteModal"><i className="fa fa-trash text-danger"/></button></td>
                         </tr>
                     )})
                 }
                 </tbody>
             </table>
         </div>
-        <MenuBar deleteDisabled={deleteDisabled} editDisabled={editDisabled}/>      
-        </>
+        <div className='container-fluid p-1 d-flex justify-content-between'>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><button className="page-link">Previous</button></li>
+                    <li class="page-item"><button className="page-link">1</button></li>
+                    <li class="page-item"><button className="page-link">2</button></li>
+                    <li class="page-item"><button className="page-link">3</button></li>
+                    <li class="page-item"><button className="page-link">Next</button></li>
+                </ul>
+            </nav>
+            <MenuBar deleteDisabled={deleteDisabled}/>
+        </div>
+      </>
     )
 }

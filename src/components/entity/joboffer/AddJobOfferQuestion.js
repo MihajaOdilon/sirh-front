@@ -27,7 +27,7 @@ export default function AddJobOfferQuestion(){
                 navigate("..")
                 setTimeout(() => {
                     setMsg("");
-                }, 1500);
+                }, 3000);
             })
             .catch(err=>console.log(err))
         }
@@ -35,13 +35,13 @@ export default function AddJobOfferQuestion(){
             setLoading(true);
             setTimeout(()=>{
                 setLoading(false);
-            },1500)
+            },3000)
         }
     }
 
     return (
         <> 
-            {msg && <div className='alert bg-success'>{msg}</div>}
+            {msg && <div className='alert alert-success'>{msg}</div>}
             <form onSubmit={handleSubmitAdd} className='form'>
                 <div className="form-group">
                     <label>Description</label>
@@ -51,7 +51,7 @@ export default function AddJobOfferQuestion(){
                     <label>Note maximal</label>
                     <input type={"number"} value={maxMark} onChange={(e)=>setMaxMark(e.target.value)}/>
                 </div>
-                {loading && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+                {loading && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
                 <MenuBarConfirm/>
             </form>
         </>

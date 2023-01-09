@@ -52,7 +52,7 @@ export default function AddCandidateResponses() {
                     "questionId":key,
                     "mark":value
                 }})
-                .then(()=>navigate("../"+idcandidate))
+                .then(()=>navigate(".."))
             }
             if(remark){
                 axios.put(context.url+"interviews",null,{params:{
@@ -82,7 +82,7 @@ export default function AddCandidateResponses() {
                                         <input type="number" max={question.maxMark} value={Idquestions[question.id]} onChange={updateIdquestions} id={question.id} className="form-control"/>
                                         {
                                             Idquestions[question.id]==="" &&
-                                            <div className='alert bg-warning'>{INVALID_INPUT}</div>
+                                            <div className='alert alert-warning'>{INVALID_INPUT}</div>
                                         }
                                     </div>
                                 )
@@ -116,7 +116,7 @@ export default function AddCandidateResponses() {
                         </div>
                         <div className="container-fluid text-end p-0">
                             <div className='btn-group'>
-                            <button type="button" className="btn btn-secondary" onClick={()=>navigate("../"+idcandidate)}>Annuler</button>
+                            <button type="button" className="btn btn-secondary" onClick={()=>navigate("..")}>Annuler</button>
                             <button type="submit" className="btn btn-primary" disabled={Idquestions.size!==questions.length}>Enregistrer</button>                                        
                             </div>
                         </div>

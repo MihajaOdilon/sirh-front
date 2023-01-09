@@ -18,8 +18,6 @@ export default function AddCandidate(){
     const [cin , setCin] = useState("");
     const [phone , setPhone] = useState("");
     const [gender , setGender] = useState("");
-    const [interview , setInterview] = useState([]);
-    const [dateInterview , setDateInterview] = useState();
     const context = useContext(ContextUrl);
     const [isValid,setValid] = useState(null);
     const [errorMsg,setErrorMsg] = useState("")
@@ -27,7 +25,7 @@ export default function AddCandidate(){
     console.log(moment(dob).format("YYYY-MM-DD"))
     const handleSubmitAdd = async (e) => {
     e.preventDefault();
-    if(name && firstname && dob && email && address && cin && phone && gender && dateInterview){
+    if(name && firstname && dob && email && address && cin && phone && gender){
         await axios.post(context.url + 'persons' , {
             "name":name,
             "firstname":firstname,
@@ -43,16 +41,8 @@ export default function AddCandidate(){
                 "jobOfferId":idjoboffer,
                 "personId" : data.id
             }})
-            .then(({data})=>{
-                axios.post(context.url+"interviews",null,{params:{
-                    "candidateId":data.id,
-                    "offerId":idjoboffer,   
-                    "dateTime":moment(dateInterview).format("YYYY-MM-DDTHH:mm")
-                }})
-                .finally(()=>{
-                    navigate("..")
-                })
-
+            .then(()=>{
+                navigate("..")
             })
 
         })
@@ -60,60 +50,72 @@ export default function AddCandidate(){
             setErrorMsg(err.response.data)
             setTimeout(()=>{
                 setErrorMsg("");
-            },1500)
+            },3000)
         });
         }
     else{
         setValid(true);
         setTimeout(() => {
             setValid(false);
-        }, 1500);
+        }, 3000);
     }
   }
 
     return (
     <>
         <form onSubmit={handleSubmitAdd} className='form'>
-            <div className="form-group">
-                <label >Nom</label>
-                <input type="text"value={name} className="form-control" onChange={(e)=>setName(e.target.value)}/>
+            <div className="row">
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >Nom</label>
+                        <input type="text"value={name} className="form-control" onChange={(e)=>setName(e.target.value)}/>
+                    </div>
+                </div>
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >Prénom</label>
+                        <input type="text" value={firstname} className="form-control" onChange={(e)=>setFirstname(e.target.value)}/>
+                    </div>
+                </div>
             </div>
-            <div className="form-group">
-                <label >Prénom</label>
-                <input type="text" value={firstname} className="form-control" onChange={(e)=>setFirstname(e.target.value)}/>
+            <div className="row">
+                <div className="col-md">
+                    <div className="form-group">
+                        <label>Date de naissance</label>
+                        <DateTimePicker
+                            className={"datetime__picker"}
+                            value={dob}
+                            onChange={(date)=>setDob(date)}
+                            disableClock
+                        />
+                    </div>
+                </div>
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >N° CIN</label>
+                        <input type="number" value={cin} className="form-control" onChange={(e)=>setCin(e.target.value)}/>
+                    </div>
+                </div>
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >Adresse</label>
+                        <input type="text" value={address} className="form-control" onChange={(e)=>setAddress(e.target.value)}/>
+                    </div>
+                </div>
             </div>
-            <div className="form-group">
-                <label>Date de naissance</label>
-                <DateTimePicker
-                    className={"datetime__picker"}
-                    value={dob}
-                    onChange={(date)=>setDob(date)}
-                    disableClock
-                />
-            </div>
-            <div className="form-group">
-                <label >Adresse e-mail</label>
-                <input type="email" value={email} className="form-control" onChange={(e)=>setEmail(e.target.value)}/>
-            </div>
-            <div className="form-group">
-                <label >Adresse</label>
-                <input type="text" value={address} className="form-control" onChange={(e)=>setAddress(e.target.value)}/>
-            </div>
-            <div className="form-group">
-                <label >N° CIN</label>
-                <input type="number" value={cin} className="form-control" onChange={(e)=>setCin(e.target.value)}/>
-            </div>
-            <div className="form-group">
-                <label >Téléphone</label>
-                <input type="number" value={phone} className="form-control" onChange={(e)=>setPhone(e.target.value)}/>
-            </div>
-            <div className="form-group">
-                <label>Date d' entretient</label>
-                <DateTimePicker
-                    className={"datetime__picker"}
-                    value={dateInterview}
-                    onChange={(date)=>setDateInterview(date)}
-                />
+            <div className="row">
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >Adresse e-mail</label>
+                        <input type="email" value={email} className="form-control" onChange={(e)=>setEmail(e.target.value)}/>
+                    </div>
+                </div>
+                <div className="col-md">
+                    <div className="form-group">
+                        <label >Téléphone</label>
+                        <input type="number" value={phone} className="form-control" onChange={(e)=>setPhone(e.target.value)}/>
+                    </div>
+                </div>
             </div>
             <div className="form-check-inline">
                 <label className="form-check-label">
@@ -127,8 +129,8 @@ export default function AddCandidate(){
                 Femme
                 </label>
             </div>
-            {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
-            {errorMsg && <div className='alert bg-warning'>{errorMsg}</div>}
+            {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
+            {errorMsg && <div className='alert alert-warning'>{errorMsg}</div>}
             <MenuBarConfirm/>
         </form>
     </>

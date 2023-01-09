@@ -1,10 +1,9 @@
 import axios from 'axios';
 import moment from 'moment';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import DateTimePicker from 'react-datetime-picker';
 import { useNavigate, useParams } from 'react-router-dom'
-// import src from 'react-select/dist/declarations/src';
-import ContextUrl from '../../../API/Context';
+ import ContextUrl from '../../../API/Context';
 import { INVALID_INPUT } from '../../../redux/constants/alertConstants';
 
 export default function AboutEmployee() {
@@ -19,7 +18,7 @@ export default function AboutEmployee() {
     const [cnaps,setCnaps] = useState("")
     const [ostie,setOstie] = useState("")
     const [notes ,setNotes] = useState("")
-    const [photo,setPhoto] = useState("")
+    const [photo,setPhoto] = useState(null)
     const [employementContractCategories , setEmployementContractCategories] = useState([])
     const [contractCategoryId , setContractCategoryId] = useState([])
     const [disabled,setDisabled] = useState(null)
@@ -27,6 +26,8 @@ export default function AboutEmployee() {
     const [success,setSuccess] =useState("")
     const [error,setError] =useState("")
     const [selectedImg,setSelectedImg] =useState(null)
+    const file = useRef();
+
     let note = 0  
     const navigate = useNavigate()
     useEffect(()=>{
@@ -58,7 +59,7 @@ export default function AboutEmployee() {
                 setSuccess(data)
                 setTimeout(() => {
                     setSuccess()
-                }, 1500);
+                }, 3000);
             })
         }
     }
@@ -72,20 +73,33 @@ export default function AboutEmployee() {
             setSuccess(data)
             setTimeout(() => {
                 setSuccess()
-            }, 1500);
+            }, 3000);
         })
         .catch((err)=>{
             setError(err.response.data)
             setTimeout(() => {
                 setError()
-            }, 1500);
+            }, 3000);
         })
     }
-    const addPhoto = (e) =>{
-        e.preventDefault()
-        axios.put(context.url + "employees/"+idemployee+"/photo",null,{params:{
-            "photo" : selectedImg.name
-        }})
+    const createPhoto = async () => {
+        let formData = new FormData();
+        formData.append('photo', photo);
+        await axios.put(context.url + 'employees/' + idemployee  + '/photo', formData)
+        .then(({ data }) => {
+            setPhoto(null);
+            if(file !== undefined) file.current.value = "";
+            setSuccess(data)
+            setTimeout(() => {
+                setSuccess("")
+            }, 3000);
+        })
+        .catch(({err}) => {
+            console.log(err);
+        })
+        .finally(() => {
+            console.log('FINALLY');
+        });
     }
     return (
         
@@ -109,13 +123,37 @@ export default function AboutEmployee() {
                             </div>
                             {
                                 !(cnaps && ostie) &&
-                                <div className='alert bg-warning'>{INVALID_INPUT}</div>
+                                <div className='alert alert-warning'>{INVALID_INPUT}</div>
                             }
                         </form>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary"  data-bs-dismiss="modal">Annuler</button>
                         <button type="button" className="btn btn-primary" onClick={ handleAddOstieAndCnaps } data-bs-dismiss={(cnaps && ostie)?"modal":null}>Confirmer</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id='create__photo' tabIndex="-1">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Renouveller OSTIE{" & "} CNAPS</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <input type="file" accept='.png,.jpg,.jpeg' onChange={(e) => {
+                        if(e.target.files && e.target.files.length > 0){
+                            setPhoto(e.target.files[0]);
+                            console.log(e.target.files[0])
+                        }else{
+                            setPhoto(null);
+                        }
+                        }}/>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary"  data-bs-dismiss="modal">Annuler</button>
+                        <button type="button" className="btn btn-primary" disabled={ photo === null} onClick={ createPhoto } data-bs-dismiss="modal">Confirmer</button>
                     </div>
                     </div>
                 </div>
@@ -132,7 +170,7 @@ export default function AboutEmployee() {
                             <div className='form-group'>
                                 <div className="form-group">
                                     <label >Salaire de base</label>
-                                    <input type="text" value={baseSalary} className="form-control" onChange={(e)=>setBaseSalary(e.target.value)}/>
+                                    <input type="number" value={baseSalary} className="form-control" onChange={(e)=>setBaseSalary(e.target.value)}/>
                                 </div>
                                 <div className="form-group">
                                     <label>Debut de contrat</label>
@@ -152,7 +190,7 @@ export default function AboutEmployee() {
                                 </div>
                                 {
                                     !(endDate && startDate) &&
-                                    <div className='alert bg-warning'>{"La date de debut et fin de contrat sont obligatoire"}</div>
+                                    <div className='alert alert-warning'>{"La date de debut et fin de contrat sont obligatoire"}</div>
                                 }               
                             </div>
                         </form>
@@ -173,8 +211,8 @@ export default function AboutEmployee() {
                         <div className='card'>
                             <div className='card-heading'>
                                 <span>{employee.person.name +" "+ employee.person.firstname}</span>
-                                {success && <div className='alert bg-success' >{success}</div>}
-                                {error && <div className='alert bg-warning'>{error}</div>}
+                                {success && <div className='alert alert-success' >{success}</div>}
+                                {error && <div className='alert alert-warning'>{error}</div>}
                             </div>
                             <div className='card-body'>
                                 <div className='row'>
@@ -182,7 +220,7 @@ export default function AboutEmployee() {
                                         <div className='card'>
                                             <div className='card-heading'>
                                                 <span>Information</span>
-                                                <button type='button' className='btn btn-info text-light'><i className="fa fa-picture-o fs-5" aria-hidden="true"></i></button>
+                                                <button type='button' className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#create__photo"><i class="fas fa-plus-circle"></i>Photo</button>
                                             </div>
                                             <div className='card-body'>
                                                 <p>{"Date de naissance: "+employee.person.dob}</p>
@@ -191,28 +229,6 @@ export default function AboutEmployee() {
                                                 <p><i className='fa fa-envelope pe-1'/>{employee.person.email}</p>
                                                 <p><i className='fa fa-phone pe-1'/>{employee.person.phone}</p>
                                                 <p>{employee.person.gender==="m"?"Sexe: Homme":"Sexe: Femme"}</p>
-                                                {
-                                                    photo &&
-                                                    <img alt='' src={photo}></img> 
-                                                }
-                                                {/* <div>
-                                                    {
-                                                        selectedImg &&
-                                                        <div>
-                                                            <img alt='not found' width={"100px"} src={URL.createObjectURL(selectedImg)}></img>
-                                                            <button onClick={()=>setSelectedImg(null)}>Effacer</button>
-                                                        </div>
-                                                    }
-                                                    <form className='' onSubmit={addPhoto}>
-                                                        <input type={"file"} name='myImage' onChange={(e)=>{
-                                                            console.log(e.target.files[0].name)
-                                                            setSelectedImg(e.target.files[0])
-                                                        }}>
-                                                        </input>
-                                                        <button type='submit'>Confirmeer</button>  
-                                                    </form>                  
-
-                                                </div> */}
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +240,7 @@ export default function AboutEmployee() {
                                                     <div className='card-heading'>
                                                         <span>Contrat de travail</span>
                                                         {
-                                                            contract.category.id!==2 &&
+                                                            contract.category.id!==1 &&
                                                             <button type='button' value={contract.id} className='btn btn-info text-light' onClick={(e)=>setContractCategoryId(e.target.value)} data-bs-toggle="modal" data-bs-target="#add__contract">Renouveller</button>
                                                         }
                                                     </div>
@@ -235,7 +251,7 @@ export default function AboutEmployee() {
                                                                 <p>Date d'embauche : {employee.hiringDate}</p>
                                                                 <p>Debut : {contract.startDate}</p>
                                                                 {
-                                                                    contract.category.id!==2 &&
+                                                                    contract.category.id!==1 &&
                                                                     <p>Fin : {contract.endDate}</p>
                                                                 }
                                                                 <p>Salaire de base : {contract.baseSalary}</p>
@@ -280,8 +296,9 @@ export default function AboutEmployee() {
                                 </div>
                             }
                             <div className='card-footer text-end'>
-                                {/* <span>hey</span> */}
+                                <div className='container-fluid p-0'>
                                 <button type='button' className='btn btn-success' onClick={()=>navigate("../"+employee.id+"/vacation")}>Donnez un congé</button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -27,26 +27,26 @@ export default function EditJob() {
                 setMsg(data);
                 setTimeout(() => {
                     setMsg("")
-                }, 1500);
+                }, 3000);
             });
         }
         else{
             setValid(true);
             setTimeout(() => {
                 setValid(false)
-            }, 1500);
+            }, 3000);
         }
 
     }
     return (
     <>
-        {msg && <div className='alert bg-info'>{msg}</div>}
+        {msg && <div className='alert alert-info'>{msg}</div>}
         <form onSubmit={handleSubmitEdit} className='form'>
             <div className="form-group">
                 <label>Nom</label>
                 <input className='input-control' onChange={(e)=>setName(e.target.value)} type={"text"} value={name}/>
             </div>
-            {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+            {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
             <MenuBarConfirm/>
         </form>
     </>

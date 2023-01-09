@@ -50,7 +50,7 @@ const handleSubmitAdd = async (e) => {
         setLoading(true);
         setTimeout(()=>{
           setLoading(false)
-        },1500)
+        },3000)
     }
 }
 const handleSelectDegreeCategory = (e) =>{
@@ -60,7 +60,7 @@ const handleSelectDegreeCategory = (e) =>{
 
   return (
     <>
-        {msg && <div className='alert bg-success'>{msg}</div>}
+        {msg && <div className='alert alert-success'>{msg}</div>}
         <form onSubmit={handleSubmitAdd} className='form'>
             <div className="form-group">
               <label >Title</label>
@@ -91,7 +91,7 @@ const handleSelectDegreeCategory = (e) =>{
                 onChange={(date)=>setYear(date)}
                 />
             </div>
-            {loading && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+            {loading && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
             <div className='container-fluid menubar p-0'>
                 <div className='btn-group' role={"group"} aria-label="">
                     <button className="btn btn-warning text-light" type='button' onClick={()=>navigate("../"+candidate.id+"/about")}><i className="fa fa-times"></i> Annuler</button>

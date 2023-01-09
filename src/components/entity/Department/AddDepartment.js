@@ -22,7 +22,7 @@ export default function AddDepartment(){
             navigate("..")
             setTimeout(() => {
                 setMsg("");
-            }, 1500);
+            }, 3000);
         });
     }
     else{
@@ -36,13 +36,13 @@ export default function AddDepartment(){
 
     return (
       <>
-          {msg && <div className='alert bg-success'>{msg}</div>}
+          {msg && <div className='alert alert-success'>{msg}</div>}
           <form onSubmit={handleSubmitAdd} className='form'>
               <div className="form-group">
                 <label>Nom</label>
                 <input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)}/>
               </div>
-              {loading && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+              {loading && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
               <MenuBarConfirm/>
           </form>
       </>

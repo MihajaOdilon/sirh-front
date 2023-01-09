@@ -27,24 +27,24 @@ export default function EditDepartment() {
             .then(()=>setLoading(true));
             setTimeout(()=>{
                 setLoading(false);
-            },1500)
+            },3000)
         }
         else{
             setValid(true)
             setTimeout(()=>{
                 setValid(false)
-            },1500)
+            },3000)
         }
     }
     return (
         <>
-            {loading && <div className='alert bg-info'>{msg}</div>}
+            {loading && <div className='alert alert-info'>{msg}</div>}
             <form onSubmit={handleSubmitEdit} className='form'>
                 <div className="form-group">
                     <label>Nom</label>
                     <input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)}/>
                 </div>
-                {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+                {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
                 <MenuBarConfirm/>
             </form>
         </>

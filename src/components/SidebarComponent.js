@@ -1,16 +1,11 @@
-import React, { useState } from 'react'
-import Collapsible from 'react-collapsible'
-import { Sidebar, Menu, useProSidebar } from 'react-pro-sidebar'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import "./style/Sidebar.css"
 
 export default function SidebarComponent() {
 return (
-        <Sidebar className='sidebar' collapsedWidth="0">
-            <div className='container-fluid p-0'>
-                {/* <img src='../sirh.png' alt='' width={"100%"} height={"38px"}></img> */}
-            </div>
+        <div className='sidebar' collapsedWidth="0">
             <SearchBar/>
             <div className='container-fluid menu'>
                 <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#manager" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +25,6 @@ return (
                     <li className="nav-item"><NavLink className="nav-link" to={"employees"}><i className=""/>Employés</NavLink></li>
                 </ul>
             </div>
-        </Sidebar>
+        </div>
     )
 }

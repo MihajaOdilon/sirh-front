@@ -34,13 +34,13 @@ export default function VacationStories() {
                 setSuccess("Congé crée avec succès")
                 setTimeout(() => {
                     setSuccess()
-                }, 1500);
+                }, 3000);
             })
             .catch((err)=>{
                 setError(err.response.data)
                 setTimeout(() => {
                     setError()
-                }, 1500);
+                }, 3000);
             })
         }
         else{
@@ -91,11 +91,11 @@ export default function VacationStories() {
                 <div className='row'>
                 {
                     success &&
-                    <div className='alert bg-success'>{success}</div>
+                    <div className='alert alert-success'>{success}</div>
                 }
                 {
                     error &&
-                    <div className='alert bg-success'>{error}</div>
+                    <div className='alert alert-warning'>{error}</div>
                 }
                     {
                         vacations.map(vacation=>{

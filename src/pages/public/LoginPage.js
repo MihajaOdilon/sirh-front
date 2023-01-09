@@ -34,7 +34,7 @@ export default function LoginPage() {
                 <div className='container-fluid control'>
                     <input type={"text"} required className='form-control bg-dark' value={ username } placeholder="Nom d'utilisateur" onChange={(e)=>setUserName(e.target.value)}></input>
                     <input type={"password"} required className='form-control bg-dark' value={password} placeholder="Entrer le mot de passe" onChange={(e)=>setPassword(e.target.value)}></input>
-                    { error && <div className='alert bg-warning'>{error}</div>}   
+                    { error && <div className='alert alert-warning'>{error}</div>}   
                     <div className='button'>
                         <span className='pt-1'><NavLink to={""}>Mot de passe oublié?</NavLink></span>
                         <button type='submit' className='btn btn-primary ' disabled={ username.length === 0 || password.length === 0 }>S'identifier</button>

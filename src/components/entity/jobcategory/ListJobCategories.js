@@ -14,7 +14,7 @@ export default function ListesJobCategories() {
   const [jobCategories,setJobCategories] = useState([]);
   const [jobCategoryId,setJobCategoryId] = useState([]);
   const [jobs] = FetchAll(context.url+"jobs");
-  const [msg,setMsg] = useState([]);
+  const [msg,setMsg] = useState();
   useEffect(()=>{
     async function fetchData(){
         await axios.get(context.url + 'jobcategories').then(({data})=>setJobCategories(data));
@@ -26,8 +26,8 @@ export default function ListesJobCategories() {
     .then(({data})=>{
         setMsg(data);
         setTimeout(() => {
-            setMsg([]);
-        }, 1500);
+            setMsg();
+        }, 3000);
     });
   }
   useEffect(()=>{
@@ -66,21 +66,28 @@ const updateIds = (e) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Suppression</h5>
+              <h5 className="modal-title text-danger">Suppression!</h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <p>Voulez-vous supprimer vraiment la sélection ?</p>
+              <p>Voulez-vous supprimer cet catégorie d'emploi?</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-              <button type="button" className="btn btn-primary" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
+              <button type="button" className="btn btn-danger" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
             </div>
           </div>
         </div>
     </div>
     <div className='container-fluid list'>
-        {msg && <div className='alert bg-danger'>{msg}</div>}
+        {
+            msg &&
+            <div className="toast show">
+                <div class="toast-header alert-danger">
+                    {msg}
+                </div>
+            </div>
+        }
         <table className='table'>
             <thead>
                 <tr className=''>
@@ -120,15 +127,26 @@ const updateIds = (e) => {
                             </td>
                             <td>{jobcategory.minSalary}</td>
                             <td>{jobcategory.maxSalary}</td>
-                            <td><button type='button' className='btn'><i className="fa fa-edit text-primary" onClick={()=>navigate(jobcategory.id+"/edit")}></i></button></td>
-                            <td><button type='button' className='btn' disabled={disabled}><i className={disabled?"fa fa-trash text-secondary":"fa fa-trash text-danger"} onClick={()=>setJobCategoryId(jobcategory.id)} data-bs-toggle="modal" data-bs-target="#deleteModal"></i></button></td>
+                            <td><button type='button' className='btn' onClick={()=>navigate(jobcategory.id+"/edit")} ><i className="fa fa-edit text-primary"/></button></td>
+                            <td><button type='button' className='btn' onClick={()=>setJobCategoryId(jobcategory.id)} data-bs-toggle="modal" data-bs-target="#deleteModal" disabled={disabled}><i className={disabled?"fa fa-trash text-secondary":"fa fa-trash text-danger"}/></button></td>
                         </tr>
                     )})
                 }
             </tbody>
         </table>
     </div>
-    <MenuBar deleteDisabled={deleteDisabled} editDisabled={ editDisabled }/>  
+    <div className='container-fluid p-1 d-flex justify-content-between'>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><button className="page-link">Previous</button></li>
+                <li class="page-item"><button className="page-link">1</button></li>
+                <li class="page-item"><button className="page-link">2</button></li>
+                <li class="page-item"><button className="page-link">3</button></li>
+                <li class="page-item"><button className="page-link">Next</button></li>
+            </ul>
+        </nav>
+        <MenuBar deleteDisabled={deleteDisabled}/>
+    </div>
     </>
   )
 }

@@ -8,72 +8,95 @@ import { markAsDone } from '../../../API/MarkOrDeleteSelected';
 export default function ListJobOffers() {
     const context = useContext(ContextUrl);
     const navigate = useNavigate()
-    const [ids, setIds] = useState([]);
-    const [deleteDisabled, setDeleteDisabled] = useState(true);
-    const [editDisabled, setEditDisabled] = useState(true);
+    const [jobOfferId, setJobOfferId] = useState("");
     const [loading,setLoading] = useState(null);
-    const [datas,setDatas] = useState([]);
+    const [jobOffers,setJoboffers] = useState([]);
+    const [interviews,setInterviews] = useState(new Map());
     useEffect(()=>{
-        async function fetchData(){
-            await axios.get(context.url + 'joboffers/available').then(({data})=>setDatas(data)).catch((err)=>console.log(err));
+        async function fetchJobOffers(){
+            await axios.get(context.url + 'joboffers/available').then(({data})=>setJoboffers(data)).catch((err)=>console.log(err));
         }
-        fetchData();
+        fetchJobOffers()
     },[loading,context])
-
-    const handleMarkAsDone = async () => {
-      await markAsDone(ids,context.url+"joboffers/mark-as-done").finally(setLoading(true));
-      setLoading(false)
-      setDeleteDisabled(true);
-      setEditDisabled(true);
+    // useEffect(()=>{
+    //     if(jobOffers){
+    //         let interviewsTemp = interviews
+    //         jobOffers.map(joboffer=>{
+    //             axios.get(context.url + "interviews")
+    //         })
+    //         setInterviews(interviewsTemp)
+    //     }
+    // },[context,jobOffers,interviews])
+    const handleMarkAsDone = () => {
+        axios.put(context.url+"joboffers/mark-as-done",null,{params:{
+            "offerId":jobOfferId
+        }})
+        .then(({data})=>{
+            setLoading(data)
+            setTimeout(() => {
+                setLoading("")
+            }, 3000);
+        })
+    }
+    if(interviews){
+        for(let[key,value] of interviews){
+            console.log(key + " " + value)
+        }
     }
 
     return (
         <>
-            <div className="modal fade" id='deleteModal' tabIndex="-1">
+            <div className="modal fade" id='mark__as__down' tabIndex="-1">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title">Suppression</h5>
-                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <h5 className="modal-title text-danger">Attention!</h5>
                     </div>
                     <div className="modal-body">
-                      <p>Voulez-vous marquer l'offre d'emploi comme terminée ?</p>
+                      <p>Voulez-vous marquer cet offre comme terminée ?</p>
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                      <button type="button" className="btn btn-primary" onClick={handleMarkAsDone} data-bs-dismiss="modal">Marquer comme terminé</button>
+                      <button type="button" className="btn btn-danger" onClick={handleMarkAsDone} data-bs-dismiss="modal">Marquer comme terminé</button>
                     </div>
                   </div>
                 </div>
             </div>
             <div className='container-fluid'>
+                {
+                    loading &&
+                    <div className='alert alert-success'>{loading}</div>   
+                }
                 <div className='row'>
                     {
-                      datas.map(joboffer=>{
-                          return(
-                              <div className='col-md-4 card-container' key={joboffer.id}>
-                                  <div className='card'>
-                                      <div className='card-heading'>
-                                          <span>{joboffer.title}</span>
-
-                                      </div>
-                                      <div className='card-body'>
-                                          <ul className='navbar-nav'>
-                                              <li className='nav-item'>Description : {joboffer.description}</li>
-                                          </ul>
-                                      </div>
-                                      <div className='card-footer'>
-                                      <div>
-                                            <span className='p-1' onClick={()=>navigate(joboffer.id+"/questions")}><i className="fa fa-question text-warning fs-5" aria-hidden="true"></i>questions</span>
-                                            <span className='p-1' onClick={()=>navigate(joboffer.id+"/candidates")}><i className="fa fa-user text-info fs-5" aria-hidden="true"></i>candidats</span>
-                                            <span className='p-1' onClick={()=>navigate(joboffer.id+"/candidateresults")}><i className="fa fa-book text-primary fs-5" aria-hidden="true"></i>notes</span>
-                                            {/* <i className="fa     "></i> */}
-                                            <span className='p-1' onClick={()=>navigate(joboffer.id+"/choosedcandidates")}><i className="fa fa-plus-circle fs-5 text-success" aria-hidden="true"></i>employé</span>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          )
+                        jobOffers.map(joboffer=>{
+                            let interviewNumbers = 0
+                            let MarkNumbers = 0
+                            let ChoosedNumbers = 0
+                            return(
+                                <div className='col-md-4 card-container' key={joboffer.id}>
+                                    <div className='card'>
+                                        <div className='card-heading'>
+                                                <span>{joboffer.title}</span>
+                                                <button className='btn p-0' data-bs-toggle="modal" data-bs-target="#mark__as__down" onClick={(e)=>setJobOfferId(joboffer.id)}><i className="fa fa-times text-danger fs-5" aria-hidden="true"></i></button>
+                                        </div>
+                                        <div className='card-body job__offer'>
+                                            <ul className='navbar-nav'>
+                                                <li className='nav-item'>Description : {joboffer.description}</li> 
+                                                <li className='nav-item'>Description : {joboffer.jobId}</li> 
+                                            </ul>
+                                        </div>
+                                        <div className='card-footer'>
+                                            <div className='container-fluid p-0 text-end'>
+                                                <button type='button' className='bg-primary text-light p-1' onClick={()=>navigate(joboffer.id+"/managers")}>
+                                                    Gérer cette offre   
+                                                    <i className="fas fa-angle-double-right "></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
                       })
                     }
                 </div>

@@ -23,6 +23,7 @@ div form.form div.dropdown button.select{
     width: 100%;
     padding: 0 2px;
 }
+
 div form.form div.dropdown div.dropdown-menu{
     width: 100%;
     overflow: hidden;

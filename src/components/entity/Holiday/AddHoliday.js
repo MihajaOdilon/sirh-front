@@ -2,10 +2,12 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useContext, useState } from 'react'
 import ReactDatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
 import ContextUrl from '../../../API/Context';
 import { INVALID_INPUT } from '../../../redux/constants/alertConstants';
 import { MenuBarConfirm } from '../../MenuBar';
+import { DayPicker } from 'react-day-picker';
 export default function AddHoliday(){
     const [name , setName] = useState("");
     const [date , setDate] = useState(new Date());
@@ -27,7 +29,7 @@ export default function AddHoliday(){
                 navigate("..")
                 setTimeout(() => {
                     setMsg(false);
-                }, 1500);
+                }, 3000);
             })
         }
         else{
@@ -40,7 +42,7 @@ export default function AddHoliday(){
 
     return (
         <> 
-            {msg && <div className='alert bg-success'>Jour ferié crée avec succès</div>}  
+            {msg && <div className='alert alert-success'>Jour ferié crée avec succès</div>}  
             <form onSubmit={handleSubmitAdd} className='form'>
                 <div className="form-group">
                   <label>Nom</label>
@@ -54,7 +56,7 @@ export default function AddHoliday(){
                     dateFormat={"dd-MM-yyyy"}
                     />
                 </div>
-                {loading && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+                {loading && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
                 <MenuBarConfirm/>
             </form>
         </>

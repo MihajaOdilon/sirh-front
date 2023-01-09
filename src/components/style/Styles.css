@@ -3,14 +3,23 @@ a{
 }
 div.card-container{
     padding:1rem;
+    padding-top: 0;
 }
-ul.navbar li a.active{
-    box-shadow: 0 8px 5px -6px rgb(102, 102, 102);
+ul.joboffer__menu{
+    padding: 1rem;
+    /* background: rgb(3, 42, 54); */
+}
+ul.joboffer__menu li a{
+    color: rgb(145, 145, 145);
+}
+ul.joboffer__menu li a.active{
+    box-shadow: 0 10px 10px -6px rgb(0, 0, 0);
     border: 1px solid rgba(163, 163, 163, 0.76);
     padding: 5px;
+    color: rgb(0, 0, 0);
 }
 div.card{
-    box-shadow: 0 10px 15px -10px rgb(102, 102, 102);
+    box-shadow: 0 12px 15px -10px rgb(0, 0, 0);
     border-radius: 5px;
     /* background: #000; */
 }
@@ -31,6 +40,23 @@ div.choosen div.card{
 div.choosen div.card-body{
     color: rgb(104, 104, 104);
     font-weight: 500;
+}
+div.card__choosen{
+    background: rgb(85, 212, 170);
+}
+div.card__choosen div.card-body{
+    color: rgb(87, 87, 87);
+}
+div.card__finished{
+    background: rgb(143, 255, 109) !important;
+}
+div.card__finished div.card-body{
+    color: rgb(87, 87, 87);
+}
+
+div.card div.job__offer{
+    height: 100px;
+    overflow-y: auto;
 }
 div.card-container div.card div.card-heading{
     padding:5px;
@@ -53,8 +79,15 @@ div.btn-group button{
     border-radius: 0;
 }
 div.card div.card-footer{
+    display: flex;
+    justify-content: space-between;
     padding: 5px;
     font-size: .9rem;
+}
+div.card div.card-footer button{
+    font-weight: 500;
+    padding: 5px;
+    border: none;
 }
 div.menu_bar{
     padding: 0;
@@ -75,10 +108,4 @@ div.menu_bar button .age{
 }
 div.nav-bar div.menu_bar{
     white-space: nowrap;
-}
-button:active{
-    /* background: #000 !important; */
-    border: none !important;
-    border-radius: 0;
-    /* background-color: transparent !important; */
 }

@@ -33,25 +33,25 @@ export default function EditJobCategory() {
                 setSuccessMsg(data);
                 setTimeout(() => {
                     setSuccessMsg("")
-                }, 1500);
+                }, 3000);
             })
             .catch((err)=>{
                 setErrorMsg(err.response.data);
                 setTimeout(() => {
                     setErrorMsg("")
-                }, 1500);
+                }, 3000);
             });
         }//tsy ampy condition max>min
         else{
             setValid(true);
             setTimeout(() => {
                 setValid(false)
-            }, 1500);
+            }, 3000);
         }
     }
     return (
         <>
-            {successMsg && <div className='alert bg-success'>{successMsg}</div>}
+            {successMsg && <div className='alert alert-success'>{successMsg}</div>}
             <form onSubmit={handleSubmitEdit} className='form'>
                 <div className="form-group">
                     <label>Nom</label>
@@ -65,8 +65,8 @@ export default function EditJobCategory() {
                     <label>Salaire maximale</label>
                     <input type="number" value={maxSalary} className="form-control" onChange={(e)=>setMaxSalary(e.target.value)}/>
                 </div>
-                {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
-                {errorMsg && <div className='alert bg-warning'>{errorMsg}</div>}
+                {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
+                {errorMsg && <div className='alert alert-warning'>{errorMsg}</div>}
                 <MenuBarConfirm/>
             </form>
         </>

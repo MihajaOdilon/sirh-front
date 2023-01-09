@@ -357,3 +357,45 @@ span.trigger a{
 span.trigger a:hover{
     color: white;
 } */
+
+<button className='btn text-warning ' onClick={()=>navigate(joboffer.id+"/questions")}>questions</button>
+                                                <button className='btn text-secondary' onClick={()=>navigate(joboffer.id+"/candidates")}>candidats</button>
+                                                <button type="button" className="btn text-info  border-info position-relative" onClick={()=>navigate(joboffer.id+"/interviews")}>
+                                                    <span>entretient</span>
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                                        {
+                                                            joboffer.interviews.map(interview=>{
+                                                                if(interview.candidate.candidateResponses.length===0){
+                                                                    interviewNumbers ++
+                                                                }
+                                                            })
+                                                        }
+                                                        {interviewNumbers}
+                                                    </span>
+                                                </button>
+                                                <button type="button" className="btn text-primary position-relative"  onClick={()=>navigate(joboffer.id+"/candidateresults")}>
+                                                    <span>note</span>
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                                        {
+                                                        joboffer.interviews.map(interview=>{
+                                                            if(interview.candidate.candidateResponses.length!==0 && !interview.candidate.isChoosen){
+                                                                MarkNumbers ++
+                                                            }
+                                                        })
+                                                        }
+                                                        {MarkNumbers}
+                                                    </span>
+                                                </button>
+                                                <button type="button" className="btn text-success position-relative"  onClick={()=>navigate(joboffer.id+"/choosedcandidates")}>
+                                                    <span>choisi</span>
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                                        {
+                                                        joboffer.interviews.map(interview=>{
+                                                            if(interview.candidate.candidateResponses.length!==0 && interview.candidate.isChoosen){
+                                                                ChoosedNumbers ++
+                                                            }
+                                                        })
+                                                        }
+                                                        {ChoosedNumbers}
+                                                    </span>
+                                                </button>

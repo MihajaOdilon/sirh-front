@@ -5,7 +5,7 @@ div.menubar{
     position: sticky;
     bottom: 0px;
     overflow: hidden;
-    padding: .5rem 1rem; 
+    padding: 0; 
     text-align: end;
     white-space: nowrap;
     overflow: auto;

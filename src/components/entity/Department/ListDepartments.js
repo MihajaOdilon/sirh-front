@@ -14,10 +14,7 @@ export default function ListesDepartments() {
     const [departments,setDepartments] = useState([]);
     const [departmentId,setDepartmentId] = useState([])
     const [jobs] = FetchAll(context.url+"jobs");
-    const [msg,setMsg] = useState([]);
-    useEffect(()=>{
-        console.log(departmentId+"ht")
-    },[departmentId])
+    const [msg,setMsg] = useState();
     useEffect(()=>{
         async function fetchData(){
             await axios.get(context.url + 'departments')
@@ -65,8 +62,8 @@ export default function ListesDepartments() {
         .then(({data})=>{
             setMsg(data);
             setTimeout(() => {
-                setMsg([]);
-            }, 1500);
+                setMsg();
+            }, 3000);
         })
     }
     return (
@@ -75,21 +72,29 @@ export default function ListesDepartments() {
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title">Suppression</h5>
+                    <h5 className="modal-title text-danger">Suppression!</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                    <p>Voulez-vous supprimer vraiment la sélection ?</p>
+                    <p>Voulez-vous supprimer cet département?</p>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" className="btn btn-primary" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
+                    <button type="button" className="btn btn-danger" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
                 </div>
                 </div>
             </div>
         </div>
         <div className='container-fluid  list'>
-        {msg && <div className='alert bg-danger'>{msg}</div>}
+            {
+                msg &&
+                <div className="toast show">
+                    <div class="toast-header alert-danger">
+                        {msg}
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            }
             <table className='table'>
                 <thead>
                     <tr className=''>
@@ -127,7 +132,7 @@ export default function ListesDepartments() {
                                         </NavLink>
                                     }
                                 </td>
-                                <td><button type='button' className='btn'><i className="fa fa-edit text-primary" onClick={()=>navigate(department.id+"/edit")}></i></button></td>
+                                <td><button type='button' className='btn' onClick={()=>navigate(department.id+"/edit")}><i className="fa fa-edit text-primary"/></button></td>
                                 <td><button data-bs-toggle="modal" data-bs-target="#delete__department" type='button' className='btn' disabled={disabled} onClick={()=>setDepartmentId(department.id)}><i className={disabled?"fa fa-trash text-secondary":"fa fa-trash text-danger"}/></button></td>
                             </tr>
                             )})
@@ -135,7 +140,18 @@ export default function ListesDepartments() {
                 </tbody>
             </table>  
         </div>
-        <MenuBar deleteDisabled={deleteDisabled}/>  
+        <div className='container-fluid p-1 d-flex justify-content-between'>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><button className="page-link">Previous</button></li>
+                    <li class="page-item"><button className="page-link">1</button></li>
+                    <li class="page-item"><button className="page-link">2</button></li>
+                    <li class="page-item"><button className="page-link">3</button></li>
+                    <li class="page-item"><button className="page-link">Next</button></li>
+                </ul>
+            </nav>
+            <MenuBar deleteDisabled={deleteDisabled}/>
+        </div>
         </>
     )
 }

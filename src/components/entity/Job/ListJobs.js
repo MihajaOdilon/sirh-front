@@ -4,7 +4,6 @@ import ContextUrl from '../../../API/Context'
 import MenuBar from '../../MenuBar';
 import axios from 'axios';
 import $ from "jquery"
-import { joinPaths } from '@remix-run/router';
 export default function ListJobs() {
     const context = useContext(ContextUrl);
     const navigate = useNavigate();
@@ -12,11 +11,10 @@ export default function ListJobs() {
     const [deleteDisabled, setDeleteDisabled] = useState(true);
     const [editDisabled, setEditDisabled] = useState(true);
     const [jobs,setJobs] = useState([]);
-    const [job,setJob] = useState([]);
     const [jobId,setJobId] = useState([]);
     const [jobofferTitle,setJobofferTitle] = useState("");
     const [jobofferDescription,setJobofferDescription] = useState("");
-    const [msg,setMsg] = useState([]);
+    const [msg,setMsg] = useState();
     const [loading,setLoading] = useState();
     
     useEffect(()=>{
@@ -25,19 +23,13 @@ export default function ListJobs() {
       }
       fetchData();
     },[msg,context,loading])
-    // useEffect(()=>{
-    //   async function fetchData(){
-    //       await axios.get(context.url + 'jobs/'+jobId).then(({data})=>setJob(data));
-    //   }
-    //   fetchData();
-    // },[jobId,context])
     const confirmDelete = async () => {
       axios.delete(context.url+"jobs/"+jobId)
       .then(({data})=>{
           setMsg(data);
           setTimeout(() => {
-              setMsg([]);
-          }, 1500);
+              setMsg();
+          }, 3000);
       })
     }
     const handleSubmitAdd = async (e) => {
@@ -53,7 +45,7 @@ export default function ListJobs() {
             setLoading(true)
             setTimeout(() => {
                 setLoading(false)
-            }, 1500);
+            }, 3000);
           })
       }
       else{
@@ -101,15 +93,14 @@ export default function ListJobs() {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Suppression</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 className="modal-title text-danger">Suppression!</h5>
               </div>
               <div className="modal-body">
-                <p>Voulez-vous supprimer vraiment la sélection ?</p>
+                <p>Voulez-vous supprimer cet emploi?</p>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" className="btn btn-primary" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
+                <button type="button" className="btn btn-danger" onClick={ confirmDelete } data-bs-dismiss="modal">Supprimer</button>
               </div>
             </div>
           </div>
@@ -140,14 +131,22 @@ export default function ListJobs() {
           </div>
         </div>
         <div className='container-fluid list'>
-            {msg && <div className='alert bg-danger'>{msg}</div>}
-            {loading && <div className='alert bg-success'>Un offre créer avec succès</div>}
+            {
+                msg &&
+                <div className="toast show">
+                    <div class="toast-header alert-danger">
+                        {msg}
+                    </div>
+                </div>
+            }
+            {loading && <div className='alert alert-success'>Un offre créer avec succès</div>}
             <table className='table'>
                 <thead>
                 <tr className=''>
                     <th scope='row'><input type={"checkbox"}  className='form-check-input'></input></th>
                     <th scope='row'>Nom</th>
-                    <th scope='row' colSpan={3}>Actions</th>
+                    {/* <th scope='row'>Departement</th> */}
+                    <th scope='row' colSpan={2}>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -158,28 +157,29 @@ export default function ListJobs() {
                             <tr key={job.id}>
                                 <th scope='row'><input type={"checkbox"} disabled={disabled} value={job.id} onChange={updateIds} className='form-check-input'></input></th>
                                 <td>
-                                  <NavLink to={""} className={"text-decoration-none"}>
                                     {job.name}
-                                  </NavLink>
                                 </td>
+                                {/* <td>{job && job.department && job.department['id']}</td> */}
                                 <td><button type='button' className='btn' onClick={()=>navigate(job.id+"/edit")}><i className="fa fa-edit text-primary"></i></button></td>
                                 <td><button type='button' className='btn' disabled={disabled} onClick={()=>setJobId(job.id)} data-bs-toggle="modal" data-bs-target="#deleteModal"><i className={disabled?"fa fa-trash text-secondary":"fa fa-trash text-danger"}/></button></td>
-                                <td>
-                                    <button type='button' className='btn' onClick={()=>setJobId(job.id)} data-bs-toggle="modal" data-bs-target="#create__joboffer">
-                                        <i className={"fa fa-plus-circle text-success"}/>
-                                        {
-                                            job.jobOffers && job.jobOffers.length!==0 &&
-                                            <span>{job.jobOffers.length}</span>
-                                        }
-                                    </button>
-                                </td>                               
                             </tr>
                       )})
                   }
                 </tbody>
             </table>
         </div>
-        <MenuBar deleteDisabled={deleteDisabled} editDisabled={ editDisabled }/>
-        </>
+        <div className='container-fluid p-1 d-flex justify-content-between'>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><button className="page-link">Previous</button></li>
+                    <li class="page-item"><button className="page-link">1</button></li>
+                    <li class="page-item"><button className="page-link">2</button></li>
+                    <li class="page-item"><button className="page-link">3</button></li>
+                    <li class="page-item"><button className="page-link">Next</button></li>
+                </ul>
+            </nav>
+            <MenuBar deleteDisabled={deleteDisabled}/>
+        </div>
+      </>
     )
 }

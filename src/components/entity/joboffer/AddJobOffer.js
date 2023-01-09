@@ -60,7 +60,7 @@ export default function AddJobOffer(){
                         </div>
                     </div>
                 </div>
-                {loading && <div className='alert bg-warning'>Veuillez renseigner touts les champs</div>}
+                {loading && <div className='alert alert-warning'>Veuillez renseigner touts les champs</div>}
                 <MenuBarConfirm/>
             </form>
       </>

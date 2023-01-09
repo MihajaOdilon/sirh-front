@@ -5,12 +5,16 @@
     background: rgba(163, 163, 163, 0.25);
 
 }
+div.offcanvas-start{
+    /* background: rgb(0, 163, 163); */
+}
 .sidebar div.menu ul li a.nav-link,.sidebar div.menu button{
-    padding: .5rem 2px;
+    padding: .5rem .75rem .5rem 2px;
     text-align: start;
     width: 100%;
-    color: rgb(148, 148, 148);
-    font-size: .95rem;
+    color: rgb(104, 104, 104);
+    font-size: .9rem;
+    font-weight: 500;
 }
 
 .sidebar div.menu button span{
@@ -27,11 +31,15 @@
 }
 .sidebar__icon{
     position: fixed;
-    /* box-shadow: 0 8px 5px -6px rgb(102, 102, 102); */
-    z-index: 2;
-    padding: .5rem 1rem !important;
-    background: #ffffffe7;
+    background: rgb(202, 202, 202);
 
+    /* box-shadow: 0 8px 5px -6px rgb(102, 102, 102); */
+    /* box-shadow: 0 8px 10px -5px rgb(0, 0, 0); */
+    /* border-bottom: 3px dashed rgb(156, 156, 156); */
+    z-index: 1;
+    padding: 0!important;
+    padding-left: .3rem !important;
+    padding-right: .3rem !important;
 }
 
 

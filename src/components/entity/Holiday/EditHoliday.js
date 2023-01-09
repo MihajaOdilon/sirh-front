@@ -33,18 +33,18 @@ export default function EditHoliday() {
                 setLoading(true)
                 setTimeout(() => {
                     setLoading(false);
-                }, 1500);
+                }, 3000);
         }
         else{
             setValid(true);
             setTimeout(() => {
                 setValid(false)
-            }, 1500);
+            }, 3000);
         }
     }
     return (
         <>
-            {loading && <div className='alert bg-info'>{msg}</div>}
+            {loading && <div className='alert alert-info'>{msg}</div>}
             <form onSubmit={handleSubmitEdit} className='form'>
                 <div className="form-group">
                   <label>Nom du jour ferié</label>
@@ -59,7 +59,7 @@ export default function EditHoliday() {
                     dateFormat={"dd-MM-yyyy"}
                     />
                 </div>
-                {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}
+                {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}
                 <MenuBarConfirm/>
             </form>
         </>

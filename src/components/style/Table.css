@@ -4,32 +4,36 @@
 div.list{
     overflow: auto;
     overflow-wrap: break-word;
-    padding:1rem;
-    padding-bottom: 0;
+    padding:0;
+    position: relative;
 }
 div.card-heading::-webkit-scrollbar,div.list::-webkit-scrollbar{
     display: none;
 }
 table.table {
     border: 1px solid beige;
-    box-shadow: 0 8px 5px -6px rgb(102, 102, 102);
-    border-collapse: separate;
+    box-shadow: 0 10px 10px -6px rgb(0, 0, 0);
     border-radius: .3em;
+    position: relative;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    background-color: #fff;
 }
-table.table a{
-    color: rgb(6, 73, 117);
-    font-weight: 500;
-
+table.table thead{
+    position: sticky;
+    top: 0;
+    /* background: rgb(202, 202, 202); */
 }
 table.table thead tr{
-    color: rgb(128, 128, 128);
+    color: rgb(104, 104, 104);
     font-size: 15px;
     font-weight: 500;
+
 }
 table.table tbody tr{
     color: rgb(136, 136, 136);
     font-size: 15px;
-
+    /* border: none !important; */
 }
 table.table tbody tr td button{
     padding: 0 5px;

@@ -4,12 +4,16 @@ export default function MenuBar({ deleteDisabled=true }) {
   const navigate = useNavigate();
   return (
     <>
-        <div className='container-fluid menubar'>
-            <div className='btn-group' role={"group"} aria-label="">
-                <button className={deleteDisabled?"btn disabled":"btn btn-danger"} type='button' disabled={ deleteDisabled } id={"delete"}><i className="fa fa-trash"></i> Supprimer</button>
-                <button className='btn btn-success' type='button' onClick={()=>(navigate("add"))} id ='add'><i className="fa fa-plus-circle"></i> Ajouter</button>
-            </div>
-        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <button className="page-link bg-danger text-light" type='submit'><i className="fa fa-trash"></i>Supprimer</button>
+                </li>
+                <li class="page-item">
+                    <button className="page-link bg-success text-light" type='button' onClick={()=>navigate("add")}><i className="fa fa-plus"></i>Ajouter</button>
+                </li>
+            </ul>
+        </nav>  
     </>
 
   )

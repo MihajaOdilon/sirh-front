@@ -41,14 +41,14 @@ export default function AddCandidateExperience(){
             setValid(true)
             setTimeout(() => {
                 setValid(false)
-            }, 1500);
+            }, 3000);
         }
 
     }
 
     return (
     <>
-        {msg && <div className='alert bg-success'>{msg}</div>}
+        {msg && <div className='alert alert-success'>{msg}</div>}
         <form onSubmit={handleSubmitAdd} className='form'>
             <div className="form-group">
                 <label>Titre</label>
@@ -76,7 +76,7 @@ export default function AddCandidateExperience(){
                     dateFormat={"dd-MM-yyyy"}
                     />
                 </div>
-            {isValid && <div className='alert bg-warning'>{INVALID_INPUT}</div>}           
+            {isValid && <div className='alert alert-warning'>{INVALID_INPUT}</div>}           
             <div className='container-fluid menubar p-0'>
                 <div className='btn-group' role={"group"} aria-label="">
                     <button className="btn btn-warning text-light" type='button' onClick={()=>navigate("../"+candidate.id+"/about")}><i className="fa fa-times"></i> Annuler</button>

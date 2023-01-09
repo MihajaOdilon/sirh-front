@@ -10,6 +10,8 @@ export default function ListCandidateByJobOffer() {
     const navigate = useNavigate();
     const [criteria,setCriteria] = useState("");
     const [candidates,setCandidates] = useState([]);
+    const [candidateId,setCandidateId] = useState([]);
+    const [interview,setInterview] = useState([]);
     const context = useContext(ContextUrl);
     useEffect(()=>{
         async function fetchData(){
@@ -25,50 +27,57 @@ export default function ListCandidateByJobOffer() {
             axios.get(context.url + "candidates/sort", {params:{"jobOfferId":idjoboffer,"criteria":criteria}}).then(({data})=>setCandidates(data));
         }
     },[criteria,idjoboffer,context]);
+    useEffect(()=>{
+        axios.get(context.url+"interviews",{params:{"candidateId":candidateId}})
+        .then(({data})=>setInterview(data[0]))
+    })
     return (
         <div className='candidates'>
+            {/* <div className='container-fluid p-0'>
+                <div className='btn-group p-0' role={"group"}>
+                    <button type="button" className='btn p-0 pe-1 ps-1'>Tri : </button>
+                    <button type="button" className='btn p-0 pe-1 ps-1' value={"degree"} onClick={(e)=>{setCriteria(e.target.value)}}>Diplôme</button>
+                    <button type="button" className='btn p-0 pe-1 ps-1' value={"experience"} onClick={(e)=>{setCriteria(e.target.value)}}>Experience</button>
+                    <button type="button" className='btn p-0 pe-1 ps-1' value={"age"} onClick={(e)=>{setCriteria(e.target.value)}}>Age</button>
+                </div>
+
+            </div> */}
+            
             <div className='container-fluid  list'>
                 <table className='table'>
                     <thead>
-                        <tr>
-                            <td colSpan={5}>
-                                <div className='container-fluid menu_bar text-end'>
-                                    <button type="button" className='btn'>Tri : </button>
-                                    <button type="button" className='btn' value={"degree"} onClick={(e)=>{setCriteria(e.target.value)}}>Diplôme</button>
-                                    <button type="button" className='btn' value={"experience"} onClick={(e)=>{setCriteria(e.target.value)}}>Experience</button>
-                                    <button type="button" className='btn' value={"age"} onClick={(e)=>{setCriteria(e.target.value)}}>Age</button>
-                                    {/* <button type="button" className='btn pe-0' value={"note"} onClick={(e)=>{setCriteria(e.target.value)}}>Note</button> */}
-                                </div>
-                            </td>
-                        </tr>
                         <tr className=''>
                             <th scope='row'><input type={"checkbox"}  className='form-check-input'></input></th>
                             <th scope='col'>Nom</th>
-                            <th scope='col'>Sexe</th>       
                             <th scope='col'>Age</th>
-                            <th scope='col'>Entretient</th>
+                            <th scope='col'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             candidates.length!==0 &&
                             candidates.map((candidate,index)=>{
-                                return(
-                                    <tr key={candidate.id} value={candidate.id} id="mark">
-                                        <th scope='row'>
-                                            <input type={"checkbox"} value={candidate.id} className='form-check-input'/>
-                                        </th>
-                                        <td><NavLink to={candidate.id+"/about"} className={"nav-link"}>{candidate.person.name +" "+ candidate.person.firstname}</NavLink></td>
-                                        <td>{candidate.person.gender==="m"?"Homme":"Femme"}</td>
-                                        <td>{candidate.person.age + " ans"}</td>
-                                            <td><i className="fa fa-plus-circle" onClick={()=>navigate("../"+idjoboffer+'/interviews/'+candidate.id)}></i></td>                                           
-                                    </tr>
-                                )
+                                if(candidate.candidateResponses.length===0){
+                                    return(
+                                        <tr key={candidate.id} value={candidate.id} id="mark">
+                                            <th scope='row'>
+                                                <input type={"checkbox"} value={candidate.id} className='form-check-input'/>
+                                            </th>
+                                            <td>
+                                                {candidate.person.name +" "+ candidate.person.firstname}
+                                            </td>
+                                            <td>{candidate.person.age}</td>
+                                            <td>
+                                                <button className='btn pb-1' onClick={()=>navigate(candidate.id+"/about")}><i className="fas fa-info-circle text-info"></i></button>                                                                             
+                                            </td>
+                                        </tr>
+                                    )
+                                }
                             })
                         }
                         {
                             candidates.length===0 &&
-                            <tr><td colSpan={5}>Aucun candidat ici</td></tr>
+                            <tr><td colSpan={6}>Aucun candidat ici</td></tr>
                         }
                     </tbody>
                 </table>
